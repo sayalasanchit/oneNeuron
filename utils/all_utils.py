@@ -8,18 +8,38 @@ from matplotlib.colors import ListedColormap
 plt.style.use("fivethirtyeight")
 
 def prepare_data(df):
+    """This method is used to seperate the dependent and independent variables.
+
+    Args:
+        df (pd.DataFrame): It takes in input pandas DataFrame object.
+
+    Returns:
+        tuple: It returns a tuple of dependent and independent variables.
+    """
     X=df.drop('y', axis=1)
     y=df['y']
     return X, y
 
 def save_model(model, filename):
+    """This method saves the trained model.
+
+    Args:
+        model (python object): Trained model object.
+        filename (str): Path to save the model.
+    """
     model_dir="models/"
     os.makedirs(model_dir, exist_ok=True)
     filePath=os.path.join(model_dir, filename)
     joblib.dump(model, filePath)
 
 def save_plot(df, filename, model):
+    """This method saves the plot.
 
+    Args:
+        df (pd.DataFrame): pandas DataFrame.
+        filename (str): Path to save the plot.
+        model (python object): Trained model object.
+    """
     # Internal funtions: 
     def _create_base_plot(df):
         df.plot(kind="scatter", x="x1", y="x2", c="y", s=100, cmap="winter")
